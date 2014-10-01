@@ -1,0 +1,23 @@
+AllCops:
+  Exclude:
+    - vendor/**/*
+    - test/**/*
+    - bin/**/*
+
+AlignParameters:
+  Enabled: false
+
+Encoding:
+  Enabled: false
+
+LineLength:
+  Max: 200
+
+Documentation:
+  Enabled: false
+
+Style/SpaceAroundOperators:
+  Enabled: false
+
+Style/SingleSpaceBeforeFirstArg:
+  Enabled: false

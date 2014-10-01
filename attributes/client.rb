@@ -19,10 +19,10 @@
 
 # Gluster volumes to mount
 case node['platform']
-when "debian","ubuntu",
-  default['glusterfs']['client']['package'] = "glusterfs-client"
-when "redhat","centos","amazon","scientific"
-  default['glusterfs']['client']['package'] = "glusterfs"
+when 'debian', 'ubuntu',
+  default['glusterfs']['client']['package'] = 'glusterfs-client'
+when 'redhat', 'centos', 'amazon', 'scientific'
+  default['glusterfs']['client']['package'] = 'glusterfs'
 end
 
 default['glusterfs']['client']['volumes'] = []

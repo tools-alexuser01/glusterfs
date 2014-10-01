@@ -17,7 +17,7 @@
 # limitations under the License.
 #
 
-include_recipe "glusterfs::repository"
+include_recipe 'glusterfs::repository'
 
 # Install the client package
 package node['glusterfs']['client']['package']
@@ -33,12 +33,12 @@ node['glusterfs']['client']['volumes'].each do |volume_name, volume_values|
       recursive true
       action :create
     end
-    
+
     # Mount the partition and add to /etc/fstab
     mount volume_values['mount_point'] do
       device "#{volume_values['server']}:/#{volume_name}"
-      fstype "glusterfs"
-      options "defaults,_netdev"
+      fstype 'glusterfs'
+      options 'defaults,_netdev'
       pass 0
       action [:mount, :enable]
     end

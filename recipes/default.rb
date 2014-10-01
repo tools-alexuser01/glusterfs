@@ -18,4 +18,4 @@
 #
 
 # Install the gluster client package
-include_recipe "glusterfs::client"
+include_recipe 'glusterfs::client'
