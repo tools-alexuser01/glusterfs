@@ -19,20 +19,20 @@
 
 case node['platform']
 when 'ubuntu', 'debian'
-  apt_repository 'ubuntu-glusterfs-3.4' do
-    uri 'http://ppa.launchpad.net/semiosis/ubuntu-glusterfs-3.4/ubuntu'
+  apt_repository 'ubuntu-glusterfs' do
+    uri "http://ppa.launchpad.net/semiosis/ubuntu-glusterfs-#{node['glusterfs']['version']}/ubuntu"
     distribution node['lsb']['codename']
     components ['main']
     keyserver 'keyserver.ubuntu.com'
     key '774BAC4D'
     deb_src true
     not_if do
-      File.exists?('/etc/apt/sources.list.d/ubuntu-glusterfs-3.4.list')
+      File.exists?("/etc/apt/sources.list.d/ubuntu-glusterfs-#{node['glusterfs']['version']}.list")
     end
   end
 when 'redhat', 'centos', 'amazon', 'scientific'
   yum_repository 'glusterfs' do
-    url 'http://download.gluster.org/pub/gluster/glusterfs/3.4/LATEST/EPEL.repo/epel-$releasever/$basearch/'
+    url "http://download.gluster.org/pub/gluster/glusterfs/#{node['glusterfs']['version']}/LATEST/EPEL.repo/epel-$releasever/$basearch/"
     action :create
   end
 end
