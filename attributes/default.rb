@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: glusterfs
-# Attributes:: server
+# Attributes:: default
 #
 # Copyright 2014, Creative Market
 #
@@ -19,3 +19,10 @@
 
 default['glusterfs']['version'] = '3.5'
 
+# Gluster volumes to mount
+case node['platform']
+when 'debian', 'ubuntu',
+  default['glusterfs']['client']['package'] = 'glusterfs-client'
+when 'redhat', 'centos', 'amazon', 'scientific'
+  default['glusterfs']['client']['package'] = 'glusterfs'
+end
