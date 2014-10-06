@@ -18,6 +18,7 @@
 #
 
 include_recipe 'glusterfs::repository'
+include_attribute 'glusterfs::client'
 
 # Install the client package
 package node['glusterfs']['client']['package']
