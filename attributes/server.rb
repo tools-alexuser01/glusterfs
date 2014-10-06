@@ -33,6 +33,8 @@ when 'redhat', 'centos', 'amazon', 'scientific'
   default['glusterfs']['server']['dependencies'] = ['xfsprogs']
 end
 
+# Name of the service. May have been 'glusterd' prior to 3.5
+default['glusterfs']['server']['service_name'] = 'glusterfs-service'
 # Default path to use for mounting bricks
 default['glusterfs']['server']['brick_mount_path'] = '/gluster'
 # Partitions to create and format with ext4

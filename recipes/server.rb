@@ -29,6 +29,8 @@ package node['glusterfs']['server']['package']
 
 # Make sure the service is started
 service 'glusterd' do
+  service_name node['glusterfs']['server']['service_name']
+  provider Chef::Provider::Service::Upstart if platform?('ubuntu') && node['platform_version'].to_f >= 13.10
   action [:enable, :start]
 end
 
@@ -141,7 +143,7 @@ node['glusterfs']['server']['volumes'].each do |volume_name, volume_values|
           next
         else
           options = "replica #{volume_values['replica_count']}"
-          for i in 1..volume_values['replica_count']
+          (1..volume_values['replica_count']).each do |i|
             volume_bricks.each do |peer, vol_bricks|
               options << " #{peer}:#{vol_bricks[i-1]}"
             end
