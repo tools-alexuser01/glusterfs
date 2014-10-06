@@ -18,4 +18,4 @@ suggests         'xfs'
 attribute 'glusterfs/client/package',
   :display_name => 'GlusterFS Client Package Name',
   :type => 'string',
-  :recipes => \[ 'glusterfs::default', 'glusterfs::client' \]
+  :recipes => [ 'glusterfs::default', 'glusterfs::client' ]
