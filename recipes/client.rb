@@ -24,23 +24,26 @@ package node['glusterfs']['client']['package']
 
 # Mount any configured volumes
 node['glusterfs']['client']['volumes'].each do |volume_name, volume_values|
-  if volume_values['server'].nil? || volume_values['mount_point'].nil?
-    Chef::Log.warn("Missing configuration for volume #{volume_name}. Skipping...")
-    return
-  else
-    # Ensure the mount point exists
-    directory volume_values['mount_point'] do
-      recursive true
-      action :create
-    end
 
-    # Mount the partition and add to /etc/fstab
-    mount volume_values['mount_point'] do
-      device "#{volume_values['server']}:/#{volume_name}"
-      fstype 'glusterfs'
-      options 'defaults,_netdev'
-      pass 0
-      action [:mount, :enable]
-    end
+  # Validate required attributes are set
+  %w[server mount_point].each do |attr_name|
+    if volume_values[attr_name].nil?
+    Chef::Log.warn("Missing configuration key #{attr_name} for volume #{volume_name}. Skipping...")
+    return
+  end
+
+  # Ensure the mount point exists
+  directory volume_values['mount_point'] do
+    recursive true
+    action :create
+  end
+
+  # Mount the partition and add to /etc/fstab
+  mount volume_values['mount_point'] do
+    device "#{volume_values['server']}:/#{volume_name}"
+    fstype 'glusterfs'
+    options 'defaults,_netdev'
+    pass 0
+    action [:mount, :enable]
   end
 end
