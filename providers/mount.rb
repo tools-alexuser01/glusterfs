@@ -30,6 +30,7 @@ def whyrun_supported?
 end
 
 action :create do
+  @new_resource.device = "#{new_resource.server}:/#{new_resource.name}"
   mount_provider = Chef::Provider::Mount::Mount.new(@new_resource, @run_context)
   if mount_provider.mounted?
     Chef::Log.info "#{ @new_resource } already mounted - nothing to do."
@@ -63,7 +64,7 @@ def mount_glusterfs_volume
 
   # Mount the partition and add to /etc/fstab
   mount new_resource.mount_point do
-    device "#{new_resource.server}:/#{new_resource.name}"
+    device new_resource.device
     fstype 'glusterfs'
     options 'defaults,_netdev'
     pass 0
