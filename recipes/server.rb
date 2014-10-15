@@ -100,16 +100,15 @@ node['glusterfs']['server']['volumes'].each do |volume_name, volume_values|
   if volume_values['peers'].first == node['fqdn']
     # Configure the trusted pool if needed
     volume_values['peers'].each do |peer|
-      unless peer == node['fqdn']
-        execute "gluster peer probe #{peer}" do
-          action :run
-          not_if "egrep '^hostname.+=#{peer}$' /var/lib/glusterd/peers/*"
-        end
+      next if peer == node['fqdn']
+      execute "gluster peer probe #{peer}" do
+        action :run
+        not_if "egrep '^hostname.+=#{peer}$' /var/lib/glusterd/peers/*"
       end
     end
 
     # Create the volume if it doesn't exist
-    unless File.exists?("/var/lib/glusterd/vols/#{volume_name}/info")
+    unless File.exist?("/var/lib/glusterd/vols/#{volume_name}/info")
       # Create a hash of peers and their bricks
       volume_bricks = {}
       brick_count = 0

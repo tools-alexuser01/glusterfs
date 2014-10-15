@@ -25,7 +25,7 @@ include Chef::Mixin::ShellOut
 use_inline_resources if defined?(use_inline_resources)
 
 def whyrun_supported?
-	true
+  true
 end
 
 action :create do
@@ -48,7 +48,7 @@ end
 private
 
 def mount_glusterfs_volume
-  include_recipe 'glusterfs::repository'
+  @run_context.include_recipe 'glusterfs::repository'
 
   # Install the client package
   package node['glusterfs']['client']['package']
@@ -76,13 +76,13 @@ def mounted?
   # "mount" outputs the mount points as real paths. Convert
   # the mount_point of the resource to a real path in case it
   # contains symlinks in its parents dirs.
-  real_mount_point = if ::File.exists? @new_resource.mount_point
-                       ::File.realpath(@new_resource.mount_point)
+  real_mount_point = if ::File.exist? new_resource.mount_point
+                       ::File.realpath(new_resource.mount_point)
                      else
-                       @new_resource.mount_point
+                       new_resource.mount_point
                      end
 
-  shell_out!("mount").stdout.each_line do |line|
+  shell_out!('mount').stdout.each_line do |line|
     case line
     when /^#{device_mount_regex}\s+on\s+#{Regexp.escape(real_mount_point)}\s/
       mounted = true
@@ -92,5 +92,5 @@ def mounted?
       Chef::Log.debug("Special device #{$~[1]} mounted as #{real_mount_point}")
     end
   end
-  @current_resource.mounted(mounted)
+  current_resource.mounted(mounted)
 end

@@ -27,7 +27,7 @@ when 'ubuntu', 'debian'
     key '774BAC4D'
     deb_src true
     not_if do
-      File.exists?("/etc/apt/sources.list.d/ubuntu-glusterfs-#{node['glusterfs']['version']}.list")
+      File.exist?("/etc/apt/sources.list.d/ubuntu-glusterfs-#{node['glusterfs']['version']}.list")
     end
   end
 when 'redhat', 'centos', 'amazon', 'scientific'

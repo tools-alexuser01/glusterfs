@@ -27,15 +27,13 @@ node['glusterfs']['client']['volumes'].each do |volume_name, volume_values|
 
   # Validate required attributes are set
   skip_volume = false
-  %w[server mount_point].each do |attr_name|
+  %w(server mount_point).each do |attr_name|
     if volume_values[attr_name].nil?
       Chef::Log.warn("Missing configuration key #{attr_name} for volume #{volume_name}. Skipping...")
       skip_volume = true
     end
   end
-  if skip_volume == true
-    return
-  end
+  return if skip_volume == true
 
   # Ensure the mount point exists
   directory volume_values['mount_point'] do
