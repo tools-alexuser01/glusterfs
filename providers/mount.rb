@@ -30,7 +30,7 @@ def whyrun_supported?
 end
 
 action :create do
-  @new_resource.device = "#{new_resource.server}:/#{new_resource.name}"
+  @new_resource.device = "#{new_resource.server}:/#{new_resource.name}" if @new_resource.device.nil?
   mount_provider = Chef::Provider::Mount::Mount.new(@new_resource, @run_context)
   if mount_provider.mounted?
     Chef::Log.info "#{ @new_resource } already mounted - nothing to do."

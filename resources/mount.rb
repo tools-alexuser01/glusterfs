@@ -33,3 +33,8 @@ attribute :server,
 attribute :mount_point,
           kind_of: String,
           required: true
+
+attribute :device,
+          kind_of: String,
+          required: false,
+          default: nil
