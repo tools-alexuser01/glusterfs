@@ -29,7 +29,7 @@ def whyrun_supported?
 end
 
 action :create do
-  if @current_resource.mounted?
+  if mounted?
     Chef::Log.info "#{ @new_resource } already mounted - nothing to do."
   else
     converge_by("Mount #{ @new_resource }") do
