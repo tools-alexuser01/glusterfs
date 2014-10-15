@@ -21,6 +21,6 @@ default_action :create
 
 actions :create
 
-attribute :name 		:kind_of => String, :required => true, :name_attribute => true
-attribute :server 		:regex => /[a-z0-9\.\-]+/, :required => true
-attribute :mount_point	:kind_of => String, :required => true
+attribute :name, 		:kind_of => String, :required => true, :name_attribute => true
+attribute :server, 		:regex => /[a-z0-9\.\-]+/, :required => true
+attribute :mount_point,	:kind_of => String, :required => true
