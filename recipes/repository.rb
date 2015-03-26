@@ -20,7 +20,7 @@
 case node['platform']
 when 'ubuntu', 'debian'
   apt_repository 'ubuntu-glusterfs' do
-    uri "http://ppa.launchpad.net/semiosis/ubuntu-glusterfs-#{node['glusterfs']['version']}/ubuntu"
+    uri "http://ppa.launchpad.net/gluster/glusterfs-#{node['glusterfs']['version']}/ubuntu"
     distribution node['lsb']['codename']
     components ['main']
     keyserver 'keyserver.ubuntu.com'
