@@ -17,4 +17,4 @@
 # limitations under the License.
 #
 
-default['glusterfs']['version'] = '3.5'
+default['glusterfs']['version'] = '3.6'

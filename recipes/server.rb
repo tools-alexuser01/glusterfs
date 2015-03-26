@@ -172,7 +172,7 @@ node['glusterfs']['server']['volumes'].each do |volume_name, volume_values|
       end
     end
 
-    # Configure volume quote if configured
+    # Configure volume quota if configured
     if volume_values['quota']
       # Enable quota
       execute "gluster volume quota #{volume_name} enable" do
