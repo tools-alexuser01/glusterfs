@@ -24,7 +24,7 @@ when 'ubuntu', 'debian'
     distribution node['lsb']['codename']
     components ['main']
     keyserver 'keyserver.ubuntu.com'
-    key '774BAC4D'
+    key '3FE869A9'
     deb_src true
     not_if do
       File.exist?("/etc/apt/sources.list.d/ubuntu-glusterfs-#{node['glusterfs']['version']}.list")
